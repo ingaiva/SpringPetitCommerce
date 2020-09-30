@@ -1,0 +1,61 @@
+
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Login</title>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+	<div class="row">
+		<div class="col-5 bg-light pt-2" style="width: 100%; margin-left: auto; margin-right: auto; margin-top: 50px; text-align: center;">
+
+			<form class="mt-1 " style="width: 100%;" method="post" th:action="@{login}" th:object="${client}">
+				<h3>Login</h3>
+				<small id="msglogin" class="text-danger"  th:text="${msglogin}"></small>
+				<div class="form-group text-left">
+					<label for="Nom">Nom</label> 
+					<input type="text"
+						class="form-control" 
+						placeholder="Votre nom"
+						th:field="*{nom}"  required>
+				</div>				
+				<div class="form-group text-left ">
+					<label for="Password">Mot de passe</label> 
+					<input type="password"
+						class="form-control" 
+						aria-describedby="msgpwd" placeholder="mot de passe"
+						th:field="*{password}" required> 
+						<small id="msgpwd" class="text-danger" th:text="${msgpwd}"></small>
+				</div>
+
+				<div class="row text-center py-2">
+					<button type="submit" class="btn btn-primary col mx-1" style="width: 100%;">
+						Se connecter
+					</button>
+					<a th:href="@{accueil}" class="col mx-1 btn btn-danger">
+						Annuler
+					</a>
+				</div>
+
+				<div class="text-left my-3">
+					<a th:href="@{createclient}" class=" text-success">Créer nouveau client
+					</a>
+				</div>
+			</form>
+		</div>
+	</div>	
+</body>
+
+</html>

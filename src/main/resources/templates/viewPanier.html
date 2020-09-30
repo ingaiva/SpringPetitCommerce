@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport"	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link rel="stylesheet" href="style.css">
+		<link rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+			integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+			crossorigin="anonymous">
+		<link rel="stylesheet"	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<title>Panier</title>
+	</head>
+	
+<body>
+	<div th:insert="fragments/general.html :: navbarDynamique">
+	</div>
+
+
+	<div class="bg-light p-5" style="width: 100%; margin-left: auto; margin-right: auto; margin-top: 50px; text-align: center;">
+		<h3>Liste des produits dans votre panier</h3>
+		<h4 th:if="${panier==null || panier.size()==0}">Aucun produit trouvé</h4>
+		<div th:unless="${panier==null || panier.size()==0}">
+			<form  method="post" th:action="@{supprPanier}" th:object="${panier}">
+				<table class="table">
+					<thead class="thead-dark">
+						<tr>
+							<th scope="col">id</th>
+							<th scope="col">Libelle</th>
+							<th scope="col">Description</th>
+							<th scope="col">Quantité</th>
+							<th scope="col">prix total</th>
+							<th scope="col">..</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="item:${panier.keySet()}">
+							<td th:text="${item.id_produit}"></td>
+							<td th:text="${item.libelle}"></td>
+							<td th:text="${item.description}"></td>
+							<td th:text="${panier.get(item)}"></td>
+							<td th:text="${item.prix * panier.get(item)} + '€'"></td>
+							<td>
+								<a name="btnSupprProduit"
+									th:href="@{supprPanier(idProduit=${item.id_produit})}" >Diminuer la quantité
+								</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</form>
+			<form  method="post" th:action="@{creerCmd}" th:object="${panier}">
+				<div class="row text-center py-2">
+					<button type="submit" class="btn btn-success col mx-1" style="width: 100%;">Passer commande</button>
+					<a th:href="@{accueil}" class="col mx-1 btn btn-danger">Annuler</a>
+				</div>
+			</form>
+		</div>
+	</div>
+	
+	
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+	<script>
+ 		$(document).ready(function() {  
+        	
+        	let $liTag =  $('#liPanier');    
+       
+        	if ($liTag.hasClass('active')) {         
+          		return false;
+        	}
+        	
+       		$liTag.siblings('.active').removeClass('active');
+        	$liTag.addClass('active');        
+      	})
+    </script>
+</body>
+</html>

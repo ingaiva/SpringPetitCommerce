@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Nouveau client</title>
+	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+	<div class="col-5 bg-light pt-2" style="width: 100%; margin-left: auto; margin-right: auto; margin-top: 50px; text-align: center;">
+		<form class="my-1 " style="width: 100%;" method="post" th:action="@{createclient}" th:object="${client}">
+			<h3>Nouveau client</h3>
+			
+			<small id="msgnom" class="text-danger" th:text="${msgnom}"></small>
+					
+			<div class="form-group text-left">
+				<label for="nom">Nom</label> 
+				<input type="text"
+					class="form-control" 
+					placeholder="Votre nom"
+					th:field="*{nom}"  required> 
+			</div>
+			<div class="form-group text-left">
+				<label for="prenom">Prénom</label> 
+				<input type="text"
+					class="form-control"
+					placeholder="Votre prénom"
+					th:field="*{prenom}" > 					
+			</div>
+			<div class="row">
+				<div class="col-9 form-group text-left ">
+					<label for="password">Mot de passe</label> 
+					<input type="password"
+						class="form-control"  placeholder="Mot de passe"
+						th:field="*{password}" required>
+				</div>
+				<div class="col form-group text-left">
+					<label for="age">Age</label> 
+					<input type="number"
+						class="form-control" 
+						th:field="*{age}" > 
+				</div>
+			</div>
+
+			<div class="row text-center py-2">
+				<button type="submit" class="btn btn-success col mx-1" style="width: 100%;">Valider</button>
+				<a th:href="@{accueil}" class="col mx-1 btn btn-danger">Annuler</a>
+			</div>
+		</form>
+	</div>	
+	
+</body>
+
+</html>

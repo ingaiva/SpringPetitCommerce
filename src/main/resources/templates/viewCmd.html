@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<title>Vos commandes</title>
+	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet"
+		href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+		crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+	<div th:insert="fragments/general.html :: navbarDynamique">
+	</div>
+	
+	<div class="bg-light pt-1 px-5"	style="width: 100%; margin-left: auto; margin-right: auto; text-align: center;">
+		<h3	th:text="'Historique des commandes de ' + ${connectedCli.nom} +' ' + ${connectedCli.prenom}">
+		</h3>
+		<p th:text="'Nombre de commandes: ' + ${connectedCli.commandes.size()}">
+		</p>
+		<h4 th:if="${connectedCli.commandes.size()==0}">Aucune commande	trouvé</h4>
+		<div th:unless="${connectedCli.commandes.size()==0}">
+			<table class="table">
+				<thead class="thead-dark">
+					<tr>
+						<th scope="col">id_commande</th>
+						<th scope="col">date</th>
+						<th scope="col">produit</th>
+						<th scope="col">nombre</th>
+						<th scope="col">prix</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="item:${connectedCli.commandes}">
+						<td th:text="${item.id}"></td>
+						<td th:text="${item.date}"></td>
+						<td th:text="${item.produit}">></td>
+						<td th:text="${item.nombre}">></td>
+						<td th:text="${item.prix} + ' €'"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<div class="text-left">
+			<a th:href="@{accueil}" class="my-3 btn btn-primary">Retour</a>
+		</div>
+	</div>
+
+ 	
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+		
+		<script>
+ 		$(document).ready(function() {       
+ 						
+        	let $liTag =  $('#liCompte');  			
+       		
+        	if ($liTag.hasClass('active')) {         
+          		return false;
+        	}
+        	
+       		$liTag.siblings('.active').removeClass('active');
+        	$liTag.addClass('active');        
+      	})
+    </script>
+</body>
+
+</html>
